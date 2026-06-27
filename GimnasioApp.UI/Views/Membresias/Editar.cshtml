@@ -1,0 +1,85 @@
+@model EditarMembresiaViewModel
+@{
+    ViewData["Title"] = "Editar Membresía";
+}
+
+<div class="page-header">
+    <div class="page-header-left">
+        <h1 class="page-title">Editar Membresía</h1>
+        <p class="page-subtitle">Modifique los datos de la membresía — ID: @Model.Identificacion</p>
+    </div>
+    <a asp-action="Index" class="btn btn-outline">← Volver al listado</a>
+</div>
+
+<div class="card form-card">
+    <form asp-action="Editar" asp-route-id="@Model.Id" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Identificacion" />
+        <input type="hidden" asp-for="FechaDeInicio" />
+
+        <div class="info-box info-box-neutral">
+            <span class="info-icon">📋</span>
+            <div>
+                <strong>Identificación:</strong> @Model.Identificacion
+                — La identificación y la fecha de inicio no pueden ser modificadas.
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="form-section-title">Datos del Cliente</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label asp-for="Nombre" class="form-label"></label>
+                    <input asp-for="Nombre" class="input-text" />
+                    <span asp-validation-for="Nombre" class="validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Apellidos" class="form-label"></label>
+                    <input asp-for="Apellidos" class="input-text" />
+                    <span asp-validation-for="Apellidos" class="validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telefono" class="form-label"></label>
+                    <input asp-for="Telefono" class="input-text" />
+                    <span asp-validation-for="Telefono" class="validation-error"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="form-section-title">Datos de la Membresía</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label asp-for="PrecioBaseMensual" class="form-label"></label>
+                    <input asp-for="PrecioBaseMensual" class="input-text" type="number" step="0.01" min="0.01" />
+                    <span asp-validation-for="PrecioBaseMensual" class="validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TipoDePlan" class="form-label"></label>
+                    <select asp-for="TipoDePlan" class="input-select">
+                        <option value="">-- Seleccione un plan --</option>
+                        <option value="1">Mensual (1 mes)</option>
+                        <option value="2">Trimestral (3 meses, 10% descuento)</option>
+                        <option value="3">Anual (12 meses, 20% descuento)</option>
+                    </select>
+                    <span asp-validation-for="TipoDePlan" class="validation-error"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <span class="info-icon">ℹ</span>
+            <div>Al guardar, el sistema recalculará automáticamente el <strong>monto total</strong>, la <strong>fecha de vencimiento</strong> y el <strong>estado</strong> según el plan seleccionado.</div>
+        </div>
+
+        <div class="form-actions">
+            <a asp-action="Index" class="btn btn-outline">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

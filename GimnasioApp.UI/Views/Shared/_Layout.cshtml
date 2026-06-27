@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GimnasioApp</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="brand-icon">💪</span>
+            <span class="brand-text">GimnasioApp</span>
+        </div>
+        <ul class="navbar-links">
+            <li>
+                <a asp-controller="Membresias" asp-action="Index"
+                   class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Membresias" ? "active" : "")">
+                    Membresías Registradas
+                </a>
+            </li>
+            <li>
+                <a asp-controller="MembresiasActivas" asp-action="Index"
+                   class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "MembresiasActivas" ? "active" : "")">
+                    Membresías Activas
+                </a>
+            </li>
+            <li>
+                <a asp-controller="MembresiasVencidas" asp-action="Index"
+                   class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "MembresiasVencidas" ? "active" : "")">
+                    Membresías Vencidas
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        @if (TempData["Exito"] != null)
+        {
+            <div class="alert alert-success">
+                <span>✓</span> @TempData["Exito"]
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-error">
+                <span>✕</span> @TempData["Error"]
+            </div>
+        }
+
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <p>© @DateTime.Now.Year GimnasioApp — Sistema de Control de Membresías</p>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,87 @@
+@model AgregarMembresiaViewModel
+@{
+    ViewData["Title"] = "Agregar Membresía";
+}
+
+<div class="page-header">
+    <div class="page-header-left">
+        <h1 class="page-title">Agregar Membresía</h1>
+        <p class="page-subtitle">Complete el formulario para registrar una nueva membresía</p>
+    </div>
+    <a asp-action="Index" class="btn btn-outline">← Volver al listado</a>
+</div>
+
+<div class="card form-card">
+    <form asp-action="Agregar" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-section">
+            <h2 class="form-section-title">Datos del Cliente</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label asp-for="Identificacion" class="form-label"></label>
+                    <input asp-for="Identificacion" class="input-text" placeholder="Ej: 113450678" />
+                    <span asp-validation-for="Identificacion" class="validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telefono" class="form-label"></label>
+                    <input asp-for="Telefono" class="input-text" placeholder="Ej: 88001122" />
+                    <span asp-validation-for="Telefono" class="validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nombre" class="form-label"></label>
+                    <input asp-for="Nombre" class="input-text" placeholder="Nombre del cliente" />
+                    <span asp-validation-for="Nombre" class="validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Apellidos" class="form-label"></label>
+                    <input asp-for="Apellidos" class="input-text" placeholder="Apellidos del cliente" />
+                    <span asp-validation-for="Apellidos" class="validation-error"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="form-section-title">Datos de la Membresía</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label asp-for="PrecioBaseMensual" class="form-label"></label>
+                    <input asp-for="PrecioBaseMensual" class="input-text" type="number" step="0.01" min="0.01" placeholder="Ej: 20000" />
+                    <span asp-validation-for="PrecioBaseMensual" class="validation-error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaDeInicio" class="form-label"></label>
+                    <input asp-for="FechaDeInicio" class="input-text" type="date" />
+                    <span asp-validation-for="FechaDeInicio" class="validation-error"></span>
+                </div>
+                <div class="form-group form-group-full">
+                    <label asp-for="TipoDePlan" class="form-label"></label>
+                    <select asp-for="TipoDePlan" class="input-select">
+                        <option value="">-- Seleccione un plan --</option>
+                        <option value="1">Mensual (1 mes)</option>
+                        <option value="2">Trimestral (3 meses, 10% descuento)</option>
+                        <option value="3">Anual (12 meses, 20% descuento)</option>
+                    </select>
+                    <span asp-validation-for="TipoDePlan" class="validation-error"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <span class="info-icon">ℹ</span>
+            <div>
+                <strong>Cálculo automático:</strong> el sistema calculará el monto total y la fecha de vencimiento según el plan seleccionado.
+                El estado se determinará automáticamente: <strong>Activa</strong> si la fecha de vencimiento aún no ha pasado, o <strong>Vencida</strong> en caso contrario.
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a asp-action="Index" class="btn btn-outline">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar Membresía</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

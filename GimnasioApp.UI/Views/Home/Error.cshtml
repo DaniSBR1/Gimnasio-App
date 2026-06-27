@@ -1,0 +1,23 @@
+@model string
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="page-header">
+    <div class="page-header-left">
+        <h1 class="page-title">Ha ocurrido un error</h1>
+        <p class="page-subtitle">Se produjo un problema inesperado al procesar su solicitud.</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="empty-state">
+        <span class="empty-icon">⚠</span>
+        <p>Por favor intente nuevamente. Si el problema persiste, contacte al administrador del sistema.</p>
+        @if (!string.IsNullOrEmpty(Model))
+        {
+            <p style="color: var(--text-muted);">Identificador de la solicitud: <code>@Model</code></p>
+        }
+        <a asp-controller="Membresias" asp-action="Index" class="btn btn-primary">Volver al inicio</a>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+@model List<MembresiaActivaViewModel>
+@{
+    ViewData["Title"] = "Membresías Activas";
+}
+
+<div class="page-header">
+    <div class="page-header-left">
+        <h1 class="page-title">Membresías Activas</h1>
+        <p class="page-subtitle">Clientes con membresía vigente en este momento</p>
+    </div>
+    <span class="badge badge-activa badge-lg">Estado: Activa</span>
+</div>
+
+<div class="card">
+    <form method="get" asp-action="Index" class="filter-form">
+        <div class="filter-group">
+            <label for="identificacion" class="filter-label">Filtrar por identificación</label>
+            <div class="filter-controls">
+                <input type="text"
+                       id="identificacion"
+                       name="identificacion"
+                       value="@ViewBag.Identificacion"
+                       placeholder="Ingrese la identificación del cliente..."
+                       class="input-text" />
+                <button type="submit" class="btn btn-secondary">Buscar</button>
+                @if (!string.IsNullOrEmpty(ViewBag.Identificacion as string))
+                {
+                    <a asp-action="Index" class="btn btn-outline">Limpiar</a>
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="card">
+    @if (Model.Count == 0)
+    {
+        <div class="empty-state">
+            <span class="empty-icon">✅</span>
+            <p>No se encontraron membresías activas.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Identificación</th>
+                        <th>Nombre</th>
+                        <th>Tipo de Plan</th>
+                        <th>Fecha de Vencimiento</th>
+                        <th>Monto Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@m.Identificacion</td>
+                            <td>@m.Nombre</td>
+                            <td><span class="badge badge-plan">@m.TipoDePlan</span></td>
+                            <td>@m.FechaDeVencimiento</td>
+                            <td class="text-right">₡ @m.MontoTotal.ToString("N2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <span class="record-count">Total: @Model.Count registro(s)</span>
+        </div>
+    }
+</div>

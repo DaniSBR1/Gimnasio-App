@@ -1,0 +1,36 @@
+## .NET ##
+bin/
+obj/
+out/
+
+## Visual Studio ##
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider / VS Code ##
+.idea/
+.vscode/
+
+## Build results ##
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ll]og/
+[Ll]ogs/
+
+## NuGet ##
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+## Archivos de configuración sensibles ##
+appsettings.Production.json
+*.pfx
+
+## Sistema operativo ##
+.DS_Store
+Thumbs.db
