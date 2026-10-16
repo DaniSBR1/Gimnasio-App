@@ -67,14 +67,6 @@ dotnet run
 ---
 
 
-## API Key
-
-Todas las rutas de la API requieren el header:
-
-```
-X-Api-Key: gimnasio-api-key-2026
-```
-
 Las pruebas de los endpoints se realizan exclusivamente con **Postman** (no se expone Swagger/OpenAPI). Ejemplo de configuración en Postman:
 
 | Endpoint | Método | URL |
@@ -86,6 +78,5 @@ Las pruebas de los endpoints se realizan exclusivamente con **Postman** (no se e
 | Agregar | POST | `https://localhost:7001/api/membresias` |
 | Editar | PUT | `https://localhost:7001/api/membresias/{id}` |
 
-En cada solicitud, agrega en **Headers** la clave `X-Api-Key` con el valor `gimnasio-api-key-2026`.
 
 ---
