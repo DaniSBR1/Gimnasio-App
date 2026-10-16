@@ -80,3 +80,5 @@ Las pruebas de los endpoints se realizan exclusivamente con **Postman** (no se e
 
 
 ---
+
+*Api-Key se encuentra dentro del proyecto con fines de aprendizaje*
